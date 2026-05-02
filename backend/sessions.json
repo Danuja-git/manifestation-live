@@ -120,5 +120,347 @@
     "narrationText": "I wake up early now, and the morning feels fresh and full of possibility. I take morning walks now, and they charge me up with energy that lasts all day. I eat a nourishing breakfast now, and it gives me steady energy and focus all morning. I keep moving throughout the day now, and my energy stays strong from morning to evening. I wind down with intention now, and I fall asleep peacefully so I can rise strong tomorrow.",
     "videoUrl": "http://localhost:5000/outputs/videos/6210db91-4882-4753-8f70-1f9613943dee_fitframe.mp4",
     "avatarProfile": "adult male in casual athletic wear"
+  },
+  "e20d79cd-24a5-4d17-b063-b9b98b655c9a": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "Physical fitness"
+      },
+      {
+        "question": "What kind of physical activity are you most excited to focus on — like strength training, cardio, yoga, or something else?",
+        "answer": "Energetic and confident"
+      },
+      {
+        "question": "What does a typical day look like for you right now — do you have a routine, or does it feel pretty unpredictable?",
+        "answer": "Exercsizing more. sleeping on time. healthy meals"
+      }
+    ],
+    "topics": [
+      "physical fitness",
+      "feeling energetic",
+      "feeling confident",
+      "feeling energetic and confident",
+      "exercising more",
+      "sleeping on time",
+      "eating healthy meals"
+    ],
+    "questionCount": 3,
+    "finalTopics": [
+      "physical fitness",
+      "feeling energetic",
+      "feeling confident",
+      "feeling energetic and confident",
+      "exercising more"
+    ],
+    "title": "A Day With My Healthiest Self",
+    "avatarProfile": "adult male in casual athletic wear",
+    "scenes": [
+      {
+        "number": 1,
+        "title": "Morning Workout",
+        "visual_description": "An adult male in casual athletic wear doing dumbbell curls in a bright home gym or garage, mid-motion with arms engaged, full body visible, morning light through a window, realistic lifestyle scene",
+        "voiceover": "I work out every morning now, and it fills me with energy and confidence that carries me through the whole day.",
+        "caption": "Strength built one rep at a time"
+      },
+      {
+        "number": 2,
+        "title": "Fueling Right",
+        "visual_description": "An adult male in a casual t-shirt sitting at a kitchen table eating a balanced meal of grilled chicken, vegetables, and brown rice, fork in hand mid-bite, bright natural kitchen light, realistic lifestyle scene",
+        "voiceover": "I eat balanced meals that fuel my body and help me feel strong, focused, and ready for anything.",
+        "caption": "Good food powers great days"
+      },
+      {
+        "number": 3,
+        "title": "Midday Run",
+        "visual_description": "An adult male in athletic shorts and a fitted t-shirt running on a sunlit outdoor path through a park, full body in stride, trees in background, dynamic motion, realistic lifestyle scene",
+        "voiceover": "I get moving during the day and every run makes me feel more alive, more energetic, and more confident in myself.",
+        "caption": "Every stride builds the better you"
+      },
+      {
+        "number": 4,
+        "title": "Evening Wind-Down",
+        "visual_description": "An adult male in comfortable athletic wear doing a seated forward stretch on a yoga mat in a calm living room with soft warm lighting, body clearly stretched forward, evening atmosphere, realistic lifestyle scene",
+        "voiceover": "I wind down with stretching each evening and it clears my mind and prepares my body for deep, restful sleep.",
+        "caption": "Rest is part of the progress"
+      },
+      {
+        "number": 5,
+        "title": "Lights Out On Time",
+        "visual_description": "An adult male in a relaxed t-shirt lying in bed in a dark peaceful bedroom, eyes closed, body fully relaxed under a light blanket, a dim bedside lamp glowing softly, realistic lifestyle scene",
+        "voiceover": "I go to sleep on time now and waking up refreshed every morning is the foundation of my healthiest and most confident self.",
+        "caption": "Sleep on time. Rise stronger."
+      }
+    ],
+    "actionPlan": {
+      "today": [
+        "Do 10 minutes of movement right now, even a short walk counts",
+        "Swap one meal today for something balanced like protein and vegetables",
+        "Set a specific bedtime alarm for tonight and commit to it"
+      ],
+      "thisWeek": [
+        "Complete at least three workout sessions of 20 to 30 minutes each",
+        "Prepare two or three healthy meals at home instead of eating out",
+        "Go to bed at the same time every night to build a consistent sleep routine"
+      ]
+    },
+    "narrationText": "I work out every morning now, and it fills me with energy and confidence that carries me through the whole day. I eat balanced meals that fuel my body and help me feel strong, focused, and ready for anything. I get moving during the day and every run makes me feel more alive, more energetic, and more confident in myself. I wind down with stretching each evening and it clears my mind and prepares my body for deep, restful sleep. I go to sleep on time now and waking up refreshed every morning is the foundation of my healthiest and most confident self."
+  },
+  "7c8b9fb2-f0ac-4cd1-b1bd-98729694bc6c": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "Physical fitness"
+      },
+      {
+        "question": "What kind of physical activity are you most excited to build into your routine — like strength training, walking, yoga, or something else?",
+        "answer": "Energetic and confident"
+      },
+      {
+        "question": "What's one habit — like sleep, eating, drinking water, or movement — that you'd most like to improve to support your fitness?",
+        "answer": "Gym, sleeping on time"
+      }
+    ],
+    "topics": [
+      "physical fitness",
+      "feeling energetic",
+      "feeling confident",
+      "going to the gym",
+      "sleeping on time"
+    ],
+    "questionCount": 3,
+    "finalTopics": [
+      "physical fitness",
+      "feeling energetic",
+      "feeling confident",
+      "going to the gym",
+      "sleeping on time"
+    ],
+    "title": "A Day With My Healthiest Self",
+    "avatarProfile": "adult male in casual athletic wear",
+    "scenes": [
+      {
+        "number": 1,
+        "title": "Lights Out on Time",
+        "visual_description": "An adult male in casual sleepwear setting his phone alarm on a nightstand and sliding into bed with the room lights dimming, cozy bedroom, soft warm lighting, peaceful and intentional bedtime routine, realistic lifestyle scene",
+        "voiceover": "I go to sleep on time now, and waking up feeling rested and ready is the best part of my day.",
+        "caption": "Rest is where strength begins"
+      },
+      {
+        "number": 2,
+        "title": "Strong Morning Wake-Up",
+        "visual_description": "An adult male in casual athletic wear sitting up in bed stretching his arms wide with a confident smile, morning sunlight streaming through curtains, full body visible, energized expression, realistic lifestyle scene",
+        "voiceover": "I wake up every morning with real energy because I gave my body the sleep it deserves.",
+        "caption": "Every great day starts the night before"
+      },
+      {
+        "number": 3,
+        "title": "Showing Up at the Gym",
+        "visual_description": "An adult male in casual athletic wear pushing through a barbell bench press at a gym, focused and determined expression, gym equipment surrounding him, overhead gym lighting, full body in action, realistic lifestyle scene",
+        "voiceover": "I show up to the gym consistently and every rep makes me feel stronger and more capable than before.",
+        "caption": "Show up. Lift. Repeat."
+      },
+      {
+        "number": 4,
+        "title": "Building Physical Power",
+        "visual_description": "An adult male in casual athletic wear doing weighted squats in a gym, knees bent, barbell across shoulders, strong athletic posture mid-movement, mirrors visible in background, gym environment, realistic lifestyle scene",
+        "voiceover": "My body is getting stronger every week and I feel the power growing in everything I do.",
+        "caption": "Built rep by rep"
+      },
+      {
+        "number": 5,
+        "title": "Walking Out Confident",
+        "visual_description": "An adult male in casual athletic wear walking out of a gym entrance with a gym bag over one shoulder, head held high, relaxed confident stride, outdoor daylight, post-workout glow, realistic lifestyle scene",
+        "voiceover": "I walk out of every gym session feeling energetic, confident, and proud of the person I am becoming.",
+        "caption": "Confidence is built, not given"
+      }
+    ],
+    "actionPlan": {
+      "today": [
+        "Set a consistent bedtime alarm for tonight and put your phone down 20 minutes before sleep",
+        "Pack your gym bag and place it by the door so it is ready for tomorrow",
+        "Drink a full glass of water when you wake up to start your day with energy"
+      ],
+      "thisWeek": [
+        "Go to the gym at least 3 times this week and focus on showing up even when motivation is low",
+        "Stick to your set bedtime for 5 out of 7 nights to build your sleep routine",
+        "After each gym session write down one thing your body did well to build confidence over time"
+      ]
+    },
+    "narrationText": "I go to sleep on time now, and waking up feeling rested and ready is the best part of my day. I wake up every morning with real energy because I gave my body the sleep it deserves. I show up to the gym consistently and every rep makes me feel stronger and more capable than before. My body is getting stronger every week and I feel the power growing in everything I do. I walk out of every gym session feeling energetic, confident, and proud of the person I am becoming.",
+    "videoUrl": "http://localhost:5000/outputs/videos/7c8b9fb2-f0ac-4cd1-b1bd-98729694bc6c_fitframe.mp4",
+    "voiceoverSegments": [
+      {
+        "sceneNumber": 1,
+        "title": "Lights Out on Time",
+        "caption": "Rest is where strength begins",
+        "voiceover": "I go to sleep on time now, and waking up feeling rested and ready is the best part of my day.",
+        "startTime": 0,
+        "endTime": 5
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Strong Morning Wake-Up",
+        "caption": "Every great day starts the night before",
+        "voiceover": "I wake up every morning with real energy because I gave my body the sleep it deserves.",
+        "startTime": 5,
+        "endTime": 10
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Showing Up at the Gym",
+        "caption": "Show up. Lift. Repeat.",
+        "voiceover": "I show up to the gym consistently and every rep makes me feel stronger and more capable than before.",
+        "startTime": 10,
+        "endTime": 15
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Building Physical Power",
+        "caption": "Built rep by rep",
+        "voiceover": "My body is getting stronger every week and I feel the power growing in everything I do.",
+        "startTime": 15,
+        "endTime": 20
+      },
+      {
+        "sceneNumber": 5,
+        "title": "Walking Out Confident",
+        "caption": "Confidence is built, not given",
+        "voiceover": "I walk out of every gym session feeling energetic, confident, and proud of the person I am becoming.",
+        "startTime": 20,
+        "endTime": 25
+      }
+    ]
+  },
+  "23dd8987-7faf-4548-b7c7-58f3e1b7ae05": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "Better sleep"
+      },
+      {
+        "question": "What's one physical activity or movement you'd love to make a regular part of your life?",
+        "answer": "Calm and focused"
+      },
+      {
+        "question": "What does a typical evening look like for you right now — and what do you wish it looked like instead?",
+        "answer": "Morning walks"
+      },
+      {
+        "question": "When you imagine starting your day with a morning walk and feeling calm and focused — what does the rest of that day feel like for you emotionally?",
+        "answer": "Skipping meals"
+      }
+    ],
+    "topics": [
+      "better sleep",
+      "feeling calm and focused",
+      "calm and focused",
+      "morning walks",
+      "skipping meals",
+      "starting the day with intention"
+    ],
+    "questionCount": 4,
+    "finalTopics": [
+      "better sleep",
+      "morning walks",
+      "feeling calm and focused",
+      "skipping meals",
+      "starting the day with intention"
+    ],
+    "title": "A Day With My Healthiest Self",
+    "avatarProfile": "adult male in casual athletic wear",
+    "scenes": [
+      {
+        "number": 1,
+        "title": "The Morning Walk",
+        "visual_description": "An adult male in casual athletic wear walking briskly along a tree-lined park path in early morning golden sunlight, arms swinging naturally, full body side view, dew on the grass, soft mist in the background, realistic lifestyle scene",
+        "voiceover": "I take a morning walk every day now, and it sets the tone for everything that follows. My mind is clear, my body is awake, and I feel ready for whatever comes next.",
+        "caption": "One walk changes the whole day"
+      },
+      {
+        "number": 2,
+        "title": "Calm and Focused",
+        "visual_description": "An adult male in casual athletic wear sitting cross-legged on a yoga mat near a sunlit window, eyes closed, hands resting on knees, visibly breathing deeply, calm indoor home setting with soft natural light, realistic lifestyle scene",
+        "voiceover": "After my walk I take a few quiet minutes to breathe and settle in. I am calm, I am focused, and I carry that feeling with me all day long.",
+        "caption": "Stillness is a superpower"
+      },
+      {
+        "number": 3,
+        "title": "A Nourishing Breakfast",
+        "visual_description": "An adult male in casual athletic wear standing at a bright kitchen counter actively preparing a colorful breakfast bowl with fruits, eggs, and whole grains, reaching forward to arrange the food, warm morning kitchen light, realistic lifestyle scene",
+        "voiceover": "I fuel my body with a real breakfast every morning now. Eating well gives me steady energy and keeps me sharp and strong throughout the day.",
+        "caption": "Feed your focus"
+      },
+      {
+        "number": 4,
+        "title": "Productive and Present",
+        "visual_description": "An adult male in casual athletic wear sitting at a clean desk leaning forward and writing in a notebook with purpose, a glass of water nearby, soft daylight through a window, organized minimal workspace, realistic lifestyle scene",
+        "voiceover": "Because I started my day with intention, I move through my work feeling grounded and present. I get things done without the mental fog that used to slow me down.",
+        "caption": "Intention drives results"
+      },
+      {
+        "number": 5,
+        "title": "Peaceful Night Rest",
+        "visual_description": "An adult male in casual comfortable clothing lying in a neatly made bed in a dim softly lit bedroom, eyes closed and relaxed, body fully at rest, phone face down on the nightstand, warm ambient light, realistic lifestyle scene",
+        "voiceover": "I wind down with intention now and I go to sleep at a consistent time. I wake up tomorrow feeling truly rested, ready to do it all again.",
+        "caption": "Rest is where you grow"
+      }
+    ],
+    "actionPlan": {
+      "today": [
+        "Set a specific time for a 15-minute morning walk tomorrow and put it in your phone as an alarm",
+        "Prepare one simple breakfast ingredient tonight so your morning meal is easy to make",
+        "Set a consistent bedtime for tonight and put your phone away 30 minutes before it"
+      ],
+      "thisWeek": [
+        "Complete a morning walk at least 4 days this week, even if it is only 10 to 15 minutes each time",
+        "Eat a real breakfast every morning this week instead of skipping it, starting with something simple",
+        "Practice 3 to 5 minutes of calm deep breathing after your walk each morning to build your focus habit"
+      ]
+    },
+    "narrationText": "I take a morning walk every day now, and it sets the tone for everything that follows. My mind is clear, my body is awake, and I feel ready for whatever comes next. After my walk I take a few quiet minutes to breathe and settle in. I am calm, I am focused, and I carry that feeling with me all day long. I fuel my body with a real breakfast every morning now. Eating well gives me steady energy and keeps me sharp and strong throughout the day. Because I started my day with intention, I move through my work feeling grounded and present. I get things done without the mental fog that used to slow me down. I wind down with intention now and I go to sleep at a consistent time. I wake up tomorrow feeling truly rested, ready to do it all again.",
+    "videoUrl": "http://localhost:5000/outputs/videos/23dd8987-7faf-4548-b7c7-58f3e1b7ae05_fitframe.mp4",
+    "voiceoverSegments": [
+      {
+        "sceneNumber": 1,
+        "title": "The Morning Walk",
+        "caption": "One walk changes the whole day",
+        "voiceover": "I take a morning walk every day now, and it sets the tone for everything that follows. My mind is clear, my body is awake, and I feel ready for whatever comes next.",
+        "startTime": 0,
+        "endTime": 5
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Calm and Focused",
+        "caption": "Stillness is a superpower",
+        "voiceover": "After my walk I take a few quiet minutes to breathe and settle in. I am calm, I am focused, and I carry that feeling with me all day long.",
+        "startTime": 5,
+        "endTime": 10
+      },
+      {
+        "sceneNumber": 3,
+        "title": "A Nourishing Breakfast",
+        "caption": "Feed your focus",
+        "voiceover": "I fuel my body with a real breakfast every morning now. Eating well gives me steady energy and keeps me sharp and strong throughout the day.",
+        "startTime": 10,
+        "endTime": 15
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Productive and Present",
+        "caption": "Intention drives results",
+        "voiceover": "Because I started my day with intention, I move through my work feeling grounded and present. I get things done without the mental fog that used to slow me down.",
+        "startTime": 15,
+        "endTime": 20
+      },
+      {
+        "sceneNumber": 5,
+        "title": "Peaceful Night Rest",
+        "caption": "Rest is where you grow",
+        "voiceover": "I wind down with intention now and I go to sleep at a consistent time. I wake up tomorrow feeling truly rested, ready to do it all again.",
+        "startTime": 20,
+        "endTime": 25
+      }
+    ]
   }
 }

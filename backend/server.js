@@ -18,6 +18,7 @@ const imageDir = path.join(outputDir, "images");
 const videoDir = path.join(outputDir, "videos");
 const sessionsFile = path.join(__dirname, "sessions.json");
 
+
 [outputDir, imageDir, videoDir].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
@@ -521,14 +522,23 @@ function buildVoiceoverSegments(scenes) {
   }));
 }
 
+
+function getFontPathForFFmpeg() {
+  // Common Windows font path
+  const windowsFont = "C:/Windows/Fonts/arial.ttf";
+
+  // Escape colon for FFmpeg filter syntax
+  return windowsFont.replace(":", "\\:");
+}
+
 function sanitizeTextForFFmpeg(text) {
-  return String(text)
+  return String(text || "")
     .replace(/\\/g, "\\\\")
     .replace(/:/g, "\\:")
     .replace(/'/g, "\\'")
     .replace(/"/g, '\\"')
     .replace(/\n/g, " ")
-    .slice(0, 80);
+    .slice(0, 70);
 }
 async function createAnimatedVideo(imagePaths, scenes, sessionId) {
   return new Promise((resolve, reject) => {
@@ -539,6 +549,7 @@ async function createAnimatedVideo(imagePaths, scenes, sessionId) {
     const height = 720;
     const fps = 30;
     const frameCount = sceneDuration * fps;
+    const fontPath = getFontPathForFFmpeg();
 
     let command = ffmpeg();
 
@@ -550,17 +561,17 @@ async function createAnimatedVideo(imagePaths, scenes, sessionId) {
 
     imagePaths.forEach((_, index) => {
       const scene = scenes[index];
-
       const caption = sanitizeTextForFFmpeg(
         scene.caption || scene.title || `Scene ${index + 1}`
       );
 
       filters.push(
-        `[${index}:v]scale=${width}:${height},` +
+        `[${index}:v]` +
+          `scale=${width}:${height},` +
           `zoompan=z='min(zoom+0.0015,1.12)':d=${frameCount}:s=${width}x${height}:fps=${fps},` +
           `trim=duration=${sceneDuration},setpts=PTS-STARTPTS,` +
-          `drawbox=x=0:y=${height - 150}:w=${width}:h=150:color=black@0.45:t=fill,` +
-          `drawtext=text='${caption}':fontcolor=white:fontsize=42:x=(w-text_w)/2:y=h-100,` +
+          `drawbox=x=0:y=${height - 145}:w=${width}:h=145:color=black@0.48:t=fill,` +
+          `drawtext=fontfile='${fontPath}':text='${caption}':fontcolor=white:fontsize=42:x=(w-text_w)/2:y=h-95,` +
           `format=yuv420p[v${index}]`
       );
     });
