@@ -1,0 +1,123 @@
+{
+  "1d538518-2102-4ab4-8f27-9bbee889895e": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "I want to feel healthier, wake up earlier, walk more, and have better energy during the day."
+      }
+    ],
+    "topics": [],
+    "questionCount": 1
+  },
+  "66987093-aeea-4bef-8d94-53b500f4b4c1": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "I want to feel healthier, wake up earlier, walk more, and have better energy during the day."
+      }
+    ],
+    "topics": [],
+    "questionCount": 1
+  },
+  "97e054e8-d5bb-4df2-bd98-b085ceb2cfb2": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "I want to feel healthier, wake up earlier, walk more, and have better energy during the day."
+      }
+    ],
+    "topics": [],
+    "questionCount": 1
+  },
+  "8733e51f-cada-4d29-b988-b607d817679d": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "I want to feel healthier, wake up earlier, walk more, and have better energy during the day."
+      }
+    ],
+    "topics": [],
+    "questionCount": 1
+  },
+  "6210db91-4882-4753-8f70-1f9613943dee": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "I want to feel healthier, wake up earlier, walk more, and have better energy during the day."
+      },
+      {
+        "question": "What does a typical day look like for you right now, and what feels hardest to change?",
+        "answer": "I am lethargic throughout the day and my sleeping habits are hardest to change."
+      }
+    ],
+    "topics": [
+      "waking up earlier",
+      "walking more",
+      "better daytime energy",
+      "feeling healthier overall",
+      "walking more for energy",
+      "daytime lethargy",
+      "struggling with sleep habits"
+    ],
+    "questionCount": 2,
+    "finalTopics": [
+      "waking up earlier",
+      "walking more",
+      "better daytime energy",
+      "feeling healthier overall",
+      "walking more for energy"
+    ],
+    "title": "A Day With My Healthiest Self",
+    "scenes": [
+      {
+        "number": 1,
+        "title": "The Quiet Before the Change",
+        "visual_description": "A dimly lit bedroom at midmorning, curtains half-drawn, a person lying in bed with phone in hand, soft golden light trying to break through the window, cinematic and quiet mood, realistic lifestyle photography style",
+        "voiceover": "For a long time, mornings felt heavy. I would lie there, already tired before the day even started. The lethargy followed me everywhere. But somewhere underneath all of that, I knew a different version of me was possible. I just had not found her yet.",
+        "caption": "Every change begins with awareness"
+      },
+      {
+        "number": 2,
+        "title": "One Alarm. One Step.",
+        "visual_description": "A person setting a phone alarm the night before, then in the next frame slipping out of bed in soft morning light, feet touching the floor, a glass of water on the nightstand, warm cinematic tones, hopeful and calm atmosphere",
+        "voiceover": "I decided to start with just one thing. I set my alarm fifteen minutes earlier than usual. Not an hour. Not a complete overhaul. Just fifteen minutes. And when it went off, I got up. I drank a glass of water. That was enough for day one. That small moment felt bigger than it sounds.",
+        "caption": "Fifteen minutes can change everything"
+      },
+      {
+        "number": 3,
+        "title": "The Walk That Became a Habit",
+        "visual_description": "A person walking alone on a quiet tree-lined street in the early morning, sunlight filtering through leaves, wearing comfortable clothes, earbuds in, a slight smile, cinematic wide shot with warm natural light and peaceful energy",
+        "voiceover": "After a few days of waking up earlier, I started using that extra time to walk. Just around the block at first. No pressure, no distance goals. I noticed something surprising. By midmorning, I actually felt awake. Not dragging. Not counting the hours until I could rest again. The walks started short and slowly grew longer because I wanted them to, not because I forced myself.",
+        "caption": "Movement creates the energy you are looking for"
+      },
+      {
+        "number": 4,
+        "title": "The Afternoon That Felt Different",
+        "visual_description": "A person sitting at a desk or kitchen table in the afternoon, looking focused and calm, a bottle of water nearby, natural light through a window, a small plant on the table, cinematic close-up on a relaxed and present expression, warm and grounded tone",
+        "voiceover": "A few weeks in, something shifted. I hit that usual afternoon slump and realized it was not as deep as before. I was still tired sometimes, but it was a normal kind of tired, not that heavy fog I used to live in. Sleeping a little earlier, waking a little earlier, walking a little more. These things were quietly rebuilding my days from the inside out.",
+        "caption": "Small habits compound into real energy"
+      },
+      {
+        "number": 5,
+        "title": "The Healthiest Version of Me",
+        "visual_description": "A person standing near a window in morning light, holding a warm cup, looking outside with calm confidence, cinematic portrait shot, soft golden sunrise light filling the room, a sense of quiet pride and peace, no dramatic transformation, just a person who looks rested and present",
+        "voiceover": "This is the version of me I was working toward. Not a completely different person. Just me, but lighter. More awake. More present. I wake up earlier now and it no longer feels like a punishment. I walk because it makes the rest of my day feel human. I have more energy and I know exactly where it comes from. It came from choosing myself, one small morning at a time.",
+        "caption": "You are already becoming her"
+      }
+    ],
+    "actionPlan": {
+      "today": [
+        "Set your alarm 15 minutes earlier than usual tonight before you go to sleep",
+        "Place a full glass of water on your nightstand so it is the first thing you reach for in the morning",
+        "Choose a short 10-minute walking route near your home that you can do tomorrow morning"
+      ],
+      "thisWeek": [
+        "Walk for at least 10 minutes each morning, even on days that feel slow or low energy",
+        "Move your bedtime 15 to 20 minutes earlier to help your body start waking up more naturally",
+        "After each morning walk, take 30 seconds to notice how your body and mood feel compared to days you stayed in bed"
+      ]
+    },
+    "narrationText": "For a long time, mornings felt heavy. I would lie there, already tired before the day even started. The lethargy followed me everywhere. But somewhere underneath all of that, I knew a different version of me was possible. I just had not found her yet. I decided to start with just one thing. I set my alarm fifteen minutes earlier than usual. Not an hour. Not a complete overhaul. Just fifteen minutes. And when it went off, I got up. I drank a glass of water. That was enough for day one. That small moment felt bigger than it sounds. After a few days of waking up earlier, I started using that extra time to walk. Just around the block at first. No pressure, no distance goals. I noticed something surprising. By midmorning, I actually felt awake. Not dragging. Not counting the hours until I could rest again. The walks started short and slowly grew longer because I wanted them to, not because I forced myself. A few weeks in, something shifted. I hit that usual afternoon slump and realized it was not as deep as before. I was still tired sometimes, but it was a normal kind of tired, not that heavy fog I used to live in. Sleeping a little earlier, waking a little earlier, walking a little more. These things were quietly rebuilding my days from the inside out. This is the version of me I was working toward. Not a completely different person. Just me, but lighter. More awake. More present. I wake up earlier now and it no longer feels like a punishment. I walk because it makes the rest of my day feel human. I have more energy and I know exactly where it comes from. It came from choosing myself, one small morning at a time.",
+    "videoUrl": "http://localhost:5000/outputs/videos/6210db91-4882-4753-8f70-1f9613943dee_fitframe.mp4"
+  }
+}
