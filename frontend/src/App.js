@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 const API_BASE = "http://localhost:5000";
@@ -33,15 +33,48 @@ export default function App() {
   const [phase, setPhase] = useState("chat"); 
   // chat | loading | done | error
 
-  const [videoUrl, setVideoUrl] = useState("");
-  const [narrationText, setNarrationText] = useState("");
-  const [voiceoverSegments, setVoiceoverSegments] = useState([]);
-  const [scenes, setScenes] = useState([]);
-  const [actionPlan, setActionPlan] = useState(null);
-  const [error, setError] = useState("");
+  const [sessionId, setSessionId] = useState("");
+const [videoUrl, setVideoUrl] = useState("");
+const [narrationText, setNarrationText] = useState("");
+const [voiceoverSegments, setVoiceoverSegments] = useState([]);
+const [scenes, setScenes] = useState([]);
+const [actionPlan, setActionPlan] = useState(null);
+const [error, setError] = useState("");
+
+const [customizing, setCustomizing] = useState(false);
+const [customInput, setCustomInput] = useState("");
+
+const [availableVoices, setAvailableVoices] = useState([]);
+const [selectedVoiceName, setSelectedVoiceName] = useState("");
 
   const videoRef = useRef(null);
   const speechTimersRef = useRef([]);
+
+  useEffect(() => {
+  function loadVoices() {
+    const voices = window.speechSynthesis.getVoices();
+    setAvailableVoices(voices);
+
+    const preferred =
+      voices.find((v) => v.name.includes("Microsoft Aria")) ||
+      voices.find((v) => v.name.includes("Microsoft Jenny")) ||
+      voices.find((v) => v.name.includes("Microsoft Guy")) ||
+      voices.find((v) => v.name.includes("Google US English")) ||
+      voices.find((v) => v.lang === "en-US") ||
+      voices[0];
+
+    if (preferred && !selectedVoiceName) {
+      setSelectedVoiceName(preferred.name);
+    }
+  }
+
+  loadVoices();
+  window.speechSynthesis.onvoiceschanged = loadVoices;
+
+  return () => {
+    window.speechSynthesis.onvoiceschanged = null;
+  };
+}, [selectedVoiceName]);
 
   function addMessage(from, text) {
     setMessages((prev) => [...prev, { from, text }]);
@@ -86,36 +119,50 @@ export default function App() {
     speechTimersRef.current.forEach((timer) => clearTimeout(timer));
     speechTimersRef.current = [];
   }
-
+  function getSelectedVoice() {
+  return availableVoices.find((v) => v.name === selectedVoiceName) || null;
+}
   function speakNarration() {
-    clearSpeech();
+  clearSpeech();
 
-    if (voiceoverSegments.length > 0) {
-      voiceoverSegments.forEach((segment) => {
-        const timer = setTimeout(() => {
-          const utterance = new SpeechSynthesisUtterance(segment.voiceover);
-          utterance.rate = 0.92;
-          utterance.pitch = 1;
-          utterance.volume = 1;
+  const selectedVoice = getSelectedVoice();
 
-          window.speechSynthesis.speak(utterance);
-        }, (segment.startTime || 0) * 1000);
+  if (voiceoverSegments.length > 0) {
+    voiceoverSegments.forEach((segment) => {
+      const timer = setTimeout(() => {
+        const utterance = new SpeechSynthesisUtterance(segment.voiceover);
 
-        speechTimersRef.current.push(timer);
-      });
+        if (selectedVoice) {
+          utterance.voice = selectedVoice;
+        }
 
-      return;
-    }
+        utterance.rate = 0.82;
+        utterance.pitch = 0.95;
+        utterance.volume = 1;
 
-    if (narrationText) {
-      const utterance = new SpeechSynthesisUtterance(narrationText);
-      utterance.rate = 0.92;
-      utterance.pitch = 1;
-      utterance.volume = 1;
+        window.speechSynthesis.speak(utterance);
+      }, (segment.startTime || 0) * 1000);
 
-      window.speechSynthesis.speak(utterance);
-    }
+      speechTimersRef.current.push(timer);
+    });
+
+    return;
   }
+
+  if (narrationText) {
+    const utterance = new SpeechSynthesisUtterance(narrationText);
+
+    if (selectedVoice) {
+      utterance.voice = selectedVoice;
+    }
+
+    utterance.rate = 0.82;
+    utterance.pitch = 0.95;
+    utterance.volume = 1;
+
+    window.speechSynthesis.speak(utterance);
+  }
+}
 
   async function generateVideo() {
     try {
@@ -134,6 +181,7 @@ export default function App() {
 
       const sessionId = startRes.data.sessionId;
       let currentQuestion = startRes.data.nextQuestion;
+      setSessionId(sessionId);
 
       // 2. Send follow-up answers to backend
       for (let i = 1; i < answers.length; i++) {
@@ -172,7 +220,8 @@ export default function App() {
       setVoiceoverSegments(videoRes.data.voiceoverSegments || []);
       setScenes(videoRes.data.scenes || finalizeRes.data.scenes || []);
       setActionPlan(videoRes.data.actionPlan || finalizeRes.data.actionPlan || null);
-
+      setSessionId(videoRes.data.sessionId || sessionId);
+      
       setPhase("done");
     } catch (err) {
       console.error(err);
@@ -180,6 +229,55 @@ export default function App() {
       setPhase("error");
     }
   }
+
+  async function handleCustomizeVideo() {
+  try {
+    const cleanCustomInput = customInput.trim();
+
+    if (!cleanCustomInput) {
+      setError("Please enter what you want to customize.");
+      return;
+    }
+
+    if (!sessionId) {
+      setError("No session found. Please generate a video first.");
+      return;
+    }
+
+    setPhase("loading");
+    setError("");
+    clearSpeech();
+
+    await axios.post(`${API_BASE}/api/story/answer`, {
+      sessionId,
+      question: "Customize the video with one more topic",
+      answer: cleanCustomInput
+    });
+
+    const finalizeRes = await axios.post(`${API_BASE}/api/story/finalize`, {
+      sessionId
+    });
+
+    const videoRes = await axios.post(`${API_BASE}/api/generate-video`, {
+      sessionId,
+      usePlaceholders: false
+    });
+
+    setVideoUrl(videoRes.data.videoUrl);
+    setNarrationText(videoRes.data.narrationText || "");
+    setVoiceoverSegments(videoRes.data.voiceoverSegments || []);
+    setScenes(videoRes.data.scenes || finalizeRes.data.scenes || []);
+    setActionPlan(videoRes.data.actionPlan || finalizeRes.data.actionPlan || null);
+
+    setCustomInput("");
+    setCustomizing(false);
+    setPhase("done");
+  } catch (err) {
+    console.error(err);
+    setError(err.response?.data?.error || err.message);
+    setPhase("error");
+  }
+}
 
   function restart() {
     clearSpeech();
@@ -195,6 +293,11 @@ export default function App() {
     setScenes([]);
     setActionPlan(null);
     setError("");
+    setSessionId("");
+setCustomizing(false);
+setCustomInput("");
+setAvailableVoices([]);
+setSelectedVoiceName("");
   }
 
   const allQuestionsAnswered = answers.length >= QUESTIONS.length;
@@ -333,9 +436,13 @@ export default function App() {
                 </p>
               </div>
 
-              <button onClick={restart} style={styles.smallButton}>
-                New story
-              </button>
+              <div style={{ display: "flex", gap: 10 }}>
+  
+
+  <button onClick={restart} style={styles.smallButton}>
+    New story
+  </button>
+</div>
             </div>
 
             <div style={styles.videoWrap}>
@@ -351,18 +458,63 @@ export default function App() {
             </div>
 
             <div style={styles.buttonRow}>
-              <a href={videoUrl} download style={styles.downloadButton}>
-                Download video
-              </a>
+  <a href={videoUrl} download style={styles.downloadButton}>
+    Download video
+  </a>
 
-              <button onClick={speakNarration} style={styles.smallButton}>
-                Play narration
-              </button>
+  <button onClick={speakNarration} style={styles.smallButton}>
+    Play narration
+  </button>
 
-              <button onClick={clearSpeech} style={styles.smallButton}>
-                Stop narration
-              </button>
-            </div>
+  <button onClick={clearSpeech} style={styles.smallButton}>
+    Stop narration
+  </button>
+
+  <select
+    value={selectedVoiceName}
+    onChange={(e) => setSelectedVoiceName(e.target.value)}
+    style={styles.voiceSelect}
+  >
+    {availableVoices.map((voice) => (
+      <option key={voice.name} value={voice.name}>
+        {voice.name}
+      </option>
+    ))}
+  </select>
+</div>
+
+{customizing && (
+  <div style={styles.customizeBox}>
+    <h3 style={styles.sectionTitle}>Customize your video</h3>
+    <p style={styles.doneSubtitle}>
+      Add one more habit, activity, or feeling you want included. We’ll rebuild
+      the video with one extra scene.
+    </p>
+
+    <textarea
+      value={customInput}
+      onChange={(e) => setCustomInput(e.target.value)}
+      placeholder="Example: Add a scene where I sleep on time and wake up refreshed."
+      style={styles.customTextarea}
+    />
+
+    <div style={{ display: "flex", gap: 10, marginTop: 12 }}>
+      <button onClick={handleCustomizeVideo} style={styles.mainButton}>
+        Regenerate with this change
+      </button>
+
+      <button
+        onClick={() => {
+          setCustomizing(false);
+          setCustomInput("");
+        }}
+        style={styles.smallButton}
+      >
+        Cancel
+      </button>
+    </div>
+  </div>
+)}
 
             {scenes.length > 0 && (
               <section style={styles.section}>
@@ -757,5 +909,37 @@ const styles = {
     color: "rgba(232,221,208,0.72)",
     fontSize: 14,
     lineHeight: 1.45
-  }
+  },
+  voiceSelect: {
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(201,169,122,0.25)",
+  color: "#e8ddd0",
+  borderRadius: 999,
+  padding: "9px 14px",
+  outline: "none",
+  fontSize: 13
+},
+
+customizeBox: {
+  marginTop: 22,
+  padding: 18,
+  background: "rgba(255,255,255,0.04)",
+  border: "1px solid rgba(201,169,122,0.15)",
+  borderRadius: 16
+},
+
+customTextarea: {
+  width: "100%",
+  minHeight: 90,
+  marginTop: 12,
+  background: "rgba(255,255,255,0.05)",
+  border: "1px solid rgba(201,169,122,0.18)",
+  color: "#e8ddd0",
+  borderRadius: 12,
+  padding: 14,
+  outline: "none",
+  resize: "vertical",
+  fontSize: 14,
+  fontFamily: "inherit"
+}
 };

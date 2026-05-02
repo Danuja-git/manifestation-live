@@ -196,12 +196,20 @@ app.post("/api/story/answer", async (req, res) => {
     const session = sessions[sessionId];
 
     session.answers.push({
-      question: question || "Follow-up question",
-      answer,
-    });
+  question: question || "Follow-up question",
+  answer,
+});
 
-    session.questionCount += 1;
-    saveSessions();
+session.questionCount += 1;
+
+if (
+  question &&
+  question.toLowerCase().includes("customize")
+) {
+  session.isCustomized = true;
+}
+
+saveSessions();
 
     const conversationText = session.answers
       .map((item, index) => {
@@ -301,7 +309,10 @@ app.post("/api/story/finalize", async (req, res) => {
       .join("\n\n");
 
     const aiPrompt = `
-Create a 5-scene cinematic health and fitness future-self story.
+Create a cinematic health and fitness future-self story.
+
+Normally create exactly 5 scenes.
+If the user added a customization request after watching the video, create exactly 6 scenes maximum.
 
 Use this user's interview answers:
 ${conversationText}
@@ -329,7 +340,9 @@ For each scene, include:
 IMPORTANT RULES:
 - Return ONLY valid JSON.
 - No markdown.
-- Exactly 5 scenes.
+- Create 5 scenes normally.
+- If the conversation includes a customization request, create 6 scenes maximum.
+- If there is a later customization answer, include it clearly as one additional positive future habit scene.
 - Every voiceover must be positive, first-person, and present tense.
 - Never focus on what is wrong in a negative way.
 - Convert struggles into positive actions and benefits.
@@ -378,7 +391,8 @@ Return format:
 
     session.title = data.title || "A Day With My Healthiest Self";
     session.avatarProfile = data.avatarProfile || "adult male in casual athletic wear";
-    session.scenes = data.scenes.slice(0, 5);
+    const maxScenes = session.isCustomized ? 6 : 5;
+    session.scenes = data.scenes.slice(0, maxScenes);
     session.actionPlan = data.actionPlan || {};
     session.narrationText = buildNarrationText(session.scenes);
 
@@ -510,7 +524,7 @@ async function generatePlaceholderImages(scenes, sessionId) {
 
 
 function buildVoiceoverSegments(scenes) {
-  const sceneDuration = 5;
+  const sceneDuration = scenes.length > 5 ? 4 : 5;
 
   return scenes.map((scene, index) => ({
     sceneNumber: scene.number || index + 1,
@@ -542,9 +556,12 @@ function sanitizeTextForFFmpeg(text) {
 }
 async function createAnimatedVideo(imagePaths, scenes, sessionId) {
   return new Promise((resolve, reject) => {
-    const outputPath = path.join(videoDir, `${sessionId}_fitframe.mp4`);
+    const outputPath = path.join(
+  videoDir,
+  `${sessionId}_fitframe_${Date.now()}.mp4`
+);
 
-    const sceneDuration = 5;
+const sceneDuration = scenes.length > 5 ? 4 : 5;
     const width = 1280;
     const height = 720;
     const fps = 30;

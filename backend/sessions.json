@@ -462,5 +462,132 @@
         "endTime": 25
       }
     ]
+  },
+  "9f5960cf-4e7d-4ae4-a1d5-458bbaf50e2d": {
+    "answers": [
+      {
+        "question": "Tell me about the healthiest version of yourself you want to become.",
+        "answer": "Physical fitness"
+      },
+      {
+        "question": "What's one physical goal you're working toward — like building strength, having more energy, or staying active consistently?",
+        "answer": "Energetic and confident"
+      },
+      {
+        "question": "What's one activity you enjoy or would love to do more of — like walking, dancing, gym workouts, or something else?",
+        "answer": "Exercising regularly, eating healthy"
+      }
+    ],
+    "topics": [
+      "physical fitness",
+      "feeling energetic",
+      "building confidence",
+      "feeling confident",
+      "exercising regularly",
+      "eating healthy"
+    ],
+    "questionCount": 3,
+    "finalTopics": [
+      "physical fitness",
+      "feeling energetic",
+      "building confidence",
+      "feeling confident",
+      "exercising regularly"
+    ],
+    "title": "A Day With My Healthiest Self",
+    "avatarProfile": "adult male in casual athletic wear",
+    "scenes": [
+      {
+        "number": 1,
+        "title": "Morning Workout",
+        "visual_description": "An adult male in casual athletic wear doing a dynamic warm-up stretch in a bright home gym or outdoor space, arms reaching wide, legs in a lunge position, morning light streaming in, full body visible, realistic lifestyle scene",
+        "voiceover": "I start my morning with movement, and it fills me with energy and confidence for the whole day.",
+        "caption": "Start strong, stay strong"
+      },
+      {
+        "number": 2,
+        "title": "Lifting at the Gym",
+        "visual_description": "An adult male in casual athletic wear gripping a barbell and performing a steady lift at a gym, focused expression, muscles engaged, gym equipment visible in background, full body side view, realistic lifestyle scene",
+        "voiceover": "I show up to the gym consistently, and every rep makes me feel stronger and more capable.",
+        "caption": "Show up. Build up."
+      },
+      {
+        "number": 3,
+        "title": "Fueling with a Healthy Meal",
+        "visual_description": "An adult male in casual athletic wear seated at a kitchen table, actively scooping a balanced meal of grilled chicken, vegetables, and rice from a plate, natural light from a nearby window, realistic lifestyle scene",
+        "voiceover": "I eat nutritious meals that fuel my body and keep my energy levels high all day long.",
+        "caption": "Eat well, perform well"
+      },
+      {
+        "number": 4,
+        "title": "Staying Active Outdoors",
+        "visual_description": "An adult male in casual athletic wear jogging confidently along an outdoor trail surrounded by greenery, mid-stride full body motion, sunlight filtering through trees, realistic lifestyle scene",
+        "voiceover": "I stay active outdoors and every run builds my endurance and lifts my confidence.",
+        "caption": "Keep moving forward"
+      },
+      {
+        "number": 5,
+        "title": "Evening Recovery",
+        "visual_description": "An adult male in casual athletic wear sitting on a yoga mat on a balcony or living room floor, performing a seated forward stretch with a calm and satisfied expression, warm evening light, full body visible, realistic lifestyle scene",
+        "voiceover": "I take time to recover and stretch each evening, and it keeps my body feeling healthy and ready for tomorrow.",
+        "caption": "Rest, recover, rise again"
+      }
+    ],
+    "actionPlan": {
+      "today": [
+        "Do a 10-minute warm-up stretch or light workout this morning",
+        "Swap one processed food choice for a whole food like fruit, vegetables, or lean protein",
+        "Take a 15-minute walk outside to build momentum"
+      ],
+      "thisWeek": [
+        "Schedule three workout sessions and treat them like appointments you keep",
+        "Prepare two healthy meals at home using balanced ingredients",
+        "Track your daily activity with a simple note or fitness app to stay consistent"
+      ]
+    },
+    "narrationText": "I start my morning with movement, and it fills me with energy and confidence for the whole day. I show up to the gym consistently, and every rep makes me feel stronger and more capable. I eat nutritious meals that fuel my body and keep my energy levels high all day long. I stay active outdoors and every run builds my endurance and lifts my confidence. I take time to recover and stretch each evening, and it keeps my body feeling healthy and ready for tomorrow.",
+    "videoUrl": "http://localhost:5000/outputs/videos/9f5960cf-4e7d-4ae4-a1d5-458bbaf50e2d_fitframe_1777760138908.mp4",
+    "voiceoverSegments": [
+      {
+        "sceneNumber": 1,
+        "title": "Morning Workout",
+        "caption": "Start strong, stay strong",
+        "voiceover": "I start my morning with movement, and it fills me with energy and confidence for the whole day.",
+        "startTime": 0,
+        "endTime": 5
+      },
+      {
+        "sceneNumber": 2,
+        "title": "Lifting at the Gym",
+        "caption": "Show up. Build up.",
+        "voiceover": "I show up to the gym consistently, and every rep makes me feel stronger and more capable.",
+        "startTime": 5,
+        "endTime": 10
+      },
+      {
+        "sceneNumber": 3,
+        "title": "Fueling with a Healthy Meal",
+        "caption": "Eat well, perform well",
+        "voiceover": "I eat nutritious meals that fuel my body and keep my energy levels high all day long.",
+        "startTime": 10,
+        "endTime": 15
+      },
+      {
+        "sceneNumber": 4,
+        "title": "Staying Active Outdoors",
+        "caption": "Keep moving forward",
+        "voiceover": "I stay active outdoors and every run builds my endurance and lifts my confidence.",
+        "startTime": 15,
+        "endTime": 20
+      },
+      {
+        "sceneNumber": 5,
+        "title": "Evening Recovery",
+        "caption": "Rest, recover, rise again",
+        "voiceover": "I take time to recover and stretch each evening, and it keeps my body feeling healthy and ready for tomorrow.",
+        "startTime": 20,
+        "endTime": 25
+      }
+    ]
   }
 }
