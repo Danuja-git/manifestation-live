@@ -15,17 +15,18 @@ const PORT = process.env.PORT || 5000;
 
 const outputDir = path.join(__dirname, "outputs");
 const imageDir = path.join(outputDir, "images");
-const audioDir = path.join(outputDir, "audio");
 const videoDir = path.join(outputDir, "videos");
 const sessionsFile = path.join(__dirname, "sessions.json");
 
-[outputDir, imageDir, audioDir, videoDir].forEach((dir) => {
+[outputDir, imageDir, videoDir].forEach((dir) => {
   if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir, { recursive: true });
   }
 });
 
-// Load saved sessions if sessions.json exists
+// ------------------
+// Load / Save Sessions
+// ------------------
 let sessions = {};
 
 if (fs.existsSync(sessionsFile)) {
@@ -42,15 +43,20 @@ function saveSessions() {
   fs.writeFileSync(sessionsFile, JSON.stringify(sessions, null, 2));
 }
 
+// ------------------
+// Middleware
+// ------------------
 app.use(cors());
 app.use(express.json({ limit: "10mb" }));
-
 app.use("/outputs", express.static(outputDir));
 
 app.get("/", (req, res) => {
   res.send("FitFrame backend is running");
 });
 
+// ------------------
+// Claude Helpers
+// ------------------
 async function callClaude(userPrompt) {
   try {
     const response = await axios.post(
@@ -98,6 +104,9 @@ function buildNarrationText(scenes) {
   return scenes.map((scene) => scene.voiceover).join(" ");
 }
 
+// ------------------
+// Story Start
+// ------------------
 app.post("/api/story/start", async (req, res) => {
   try {
     const { answer } = req.body;
@@ -138,13 +147,13 @@ Important:
 - Do not include markdown.
 - Ask only ONE short follow-up question.
 - Keep it positive, realistic, and not body-shaming.
-- Focus on energy, strength, confidence, routine, wellness, sleep, nutrition, and consistency.
+- Focus on energy, strength, confidence, routine, wellness, sleep, nutrition, hydration, and consistency.
 - topicsFound must be specific user topics, not generic labels.
 
 Return format:
 {
-  "topicsFound": ["morning walks", "better energy", "healthy eating"],
-  "missingCategories": ["current challenge", "emotional outcome"],
+  "topicsFound": ["morning walks", "better sleep", "healthy meals"],
+  "missingCategories": ["challenge", "emotion"],
   "nextQuestion": "short follow-up question"
 }
 `;
@@ -168,6 +177,9 @@ Return format:
   }
 });
 
+// ------------------
+// Story Follow-up Answer
+// ------------------
 app.post("/api/story/answer", async (req, res) => {
   try {
     const { sessionId, question, answer } = req.body;
@@ -206,11 +218,11 @@ Your goal:
 Collect enough detail to create exactly 5 future-self video scenes.
 
 Important story categories:
-- current goal
-- current challenge
-- preferred activity or routine
-- nutrition/sleep/wellness detail
-- emotional outcome or future feeling
+- goal
+- challenge
+- preferred healthy activity
+- sleep / food / hydration / wellness detail
+- emotional outcome
 
 Rules:
 - If there is enough information OR the user has answered 4 total questions, set done to true.
@@ -218,20 +230,20 @@ Rules:
 - Return ONLY valid JSON.
 - Keep tone supportive and realistic.
 - Avoid body-shaming or unrealistic transformation language.
-- topicsFound must be specific user topics like "morning walks", "busy schedule challenge", "drinking more water", "feeling proud", not generic labels like "current goal".
+- topicsFound must be specific user topics like "morning walks", "sleeping on time", "drinking more water", "busy schedule", "feeling energetic".
 
 Return format:
 {
   "done": false,
-  "topicsFound": ["specific user topic 1", "specific user topic 2", "specific user topic 3"],
+  "topicsFound": ["specific topic 1", "specific topic 2", "specific topic 3"],
   "nextQuestion": "one short follow-up question"
 }
 
 If done:
 {
   "done": true,
-  "topicsFound": ["specific user topic 1", "specific user topic 2", "specific user topic 3", "specific user topic 4", "specific user topic 5"],
-  "finalTopics": ["specific user topic 1", "specific user topic 2", "specific user topic 3", "specific user topic 4", "specific user topic 5"]
+  "topicsFound": ["specific topic 1", "specific topic 2", "specific topic 3", "specific topic 4", "specific topic 5"],
+  "finalTopics": ["specific topic 1", "specific topic 2", "specific topic 3", "specific topic 4", "specific topic 5"]
 }
 `;
 
@@ -268,6 +280,9 @@ If done:
   }
 });
 
+// ------------------
+// Story Finalize
+// ------------------
 app.post("/api/story/finalize", async (req, res) => {
   try {
     const { sessionId } = req.body;
@@ -293,12 +308,15 @@ ${conversationText}
 Topics found:
 ${JSON.stringify(session.finalTopics || session.topics)}
 
-Story arc:
-1. Current intention or challenge
-2. First small healthy step
-3. Building a routine
-4. Feeling stronger, calmer, or more confident
-5. Future-self reflection
+Goal:
+Show the future healthier version of the user doing positive habits.
+
+Story style:
+- positive
+- motivating
+- practical
+- visually clear
+- hopeful
 
 For each scene, include:
 - number
@@ -307,28 +325,40 @@ For each scene, include:
 - voiceover
 - caption
 
-Important:
+IMPORTANT RULES:
 - Return ONLY valid JSON.
 - No markdown.
 - Exactly 5 scenes.
-- Make it personal to the user.
-- Keep it supportive, realistic, and healthy.
-- No extreme diet claims.
-- No unrealistic body transformation promises.
-- Voiceover should be first-person, like the user is narrating their own story.
-- Avoid harsh or depressing language.
-- Even if starting with a challenge, make the tone hopeful.
+- Every voiceover must be positive, first-person, and present tense.
+- Never focus on what is wrong in a negative way.
+- Convert struggles into positive actions and benefits.
+- If the user says they feel lazy, show an active positive habit like walking, stretching, or exercising.
+- If the user says their sleep schedule is off, show the future-self going to sleep on time or sleeping peacefully.
+- If the user says they eat poorly, show balanced meals or healthy food prep.
+- Make each visual description concrete and easy to generate as an image.
+- Every scene must show ONE clear action.
+- Use an adult male in casual athletic wear in every scene.
+- DO NOT make portrait descriptions.
+- DO NOT describe a man standing and looking at the camera.
+- The man must be doing the action clearly.
+
+Examples of good voiceovers:
+- "I take morning walks now, and they make me feel more energetic and lively."
+- "I go to sleep on time so I can wake up feeling refreshed."
+- "I eat balanced meals that help me feel strong and focused."
+- "I drink more water throughout the day, and it keeps me feeling fresh and clear."
 
 Return format:
 {
   "title": "A Day With My Healthiest Self",
+  "avatarProfile": "adult male in casual athletic wear",
   "scenes": [
     {
       "number": 1,
-      "title": "Morning Reset",
-      "visual_description": "A peaceful sunrise bedroom with workout clothes ready, water bottle beside the bed, soft natural light, realistic cinematic style",
-      "voiceover": "I start my day with one small promise to myself.",
-      "caption": "Start small"
+      "title": "Morning Walk",
+      "visual_description": "An adult male in casual athletic wear walking in a park in the morning, visible movement, full body, outdoor path, natural sunlight, realistic lifestyle scene",
+      "voiceover": "I take morning walks now, and they make me feel more energetic and lively.",
+      "caption": "Move to feel alive"
     }
   ],
   "actionPlan": {
@@ -346,6 +376,7 @@ Return format:
     }
 
     session.title = data.title || "A Day With My Healthiest Self";
+    session.avatarProfile = data.avatarProfile || "adult male in casual athletic wear";
     session.scenes = data.scenes.slice(0, 5);
     session.actionPlan = data.actionPlan || {};
     session.narrationText = buildNarrationText(session.scenes);
@@ -366,6 +397,9 @@ Return format:
   }
 });
 
+// ------------------
+// Image Generation
+// ------------------
 async function generateAllImages(scenes, sessionId) {
   const imagePromises = scenes.map((scene, index) => {
     return generateOneImage(scene.visual_description, index + 1, sessionId);
@@ -378,12 +412,28 @@ async function generateOneImage(description, sceneNumber, sessionId) {
   try {
     console.log(`Generating image ${sceneNumber}...`);
 
+    const avatar =
+      sessions[sessionId]?.avatarProfile || "adult male in casual athletic wear";
+
     const formData = new FormData();
 
     formData.append(
       "prompt",
-      `${description}. Cinematic wellness video style, realistic, warm lighting, healthy lifestyle, motivational, 16:9 composition.`
+      `Create a realistic health and fitness lifestyle image.
+Subject: ${avatar}.
+Scene: ${description}.
+Important:
+- Show the male actively doing the action clearly.
+- Full scene, not a close-up portrait.
+- Do not make him stand still and face the camera.
+- Do not create a studio portrait.
+- Show movement or obvious activity.
+- Make the habit easy to understand visually.
+- Realistic lifestyle photography.
+- Informative, clear, and natural.
+- 16:9 composition.`
     );
+
     formData.append("output_format", "jpeg");
     formData.append("aspect_ratio", "16:9");
 
@@ -409,10 +459,21 @@ async function generateOneImage(description, sceneNumber, sessionId) {
 
     return imagePath;
   } catch (error) {
-    const details = error.response?.data || error.message;
-    console.error(`Image ${sceneNumber} error:`, details);
-    throw new Error(`Image ${sceneNumber} generation failed`);
+  let details = error.message;
+
+  if (error.response?.data) {
+    if (Buffer.isBuffer(error.response.data)) {
+      details = error.response.data.toString("utf-8");
+    } else {
+      details = JSON.stringify(error.response.data, null, 2);
+    }
   }
+
+  console.error(`Image ${sceneNumber} status:`, error.response?.status);
+  console.error(`Image ${sceneNumber} error:`, details);
+
+  throw new Error(`Image ${sceneNumber} generation failed: ${details}`);
+}
 }
 
 async function generatePlaceholderImages(scenes, sessionId) {
@@ -441,29 +502,34 @@ async function generatePlaceholderImages(scenes, sessionId) {
   return imagePaths;
 }
 
-// Silent audio only.
-// Browser/frontend will handle real narration using speechSynthesis.
-async function generateSilentAudio(sessionId, durationSeconds = 25) {
-  return new Promise((resolve, reject) => {
-    const audioPath = path.join(audioDir, `${sessionId}_silent.mp3`);
 
-    ffmpeg()
-      .input("anullsrc=channel_layout=stereo:sample_rate=44100")
-      .inputFormat("lavfi")
-      .duration(durationSeconds)
-      .output(audioPath)
-      .on("end", () => {
-        console.log("Silent audio generated");
-        resolve(audioPath);
-      })
-      .on("error", (err) => {
-        console.error("Silent audio error:", err.message);
-        reject(new Error("Silent audio generation failed"));
-      })
-      .run();
-  });
+// ------------------
+// Video Generation
+// ------------------
+
+
+function buildVoiceoverSegments(scenes) {
+  const sceneDuration = 5;
+
+  return scenes.map((scene, index) => ({
+    sceneNumber: scene.number || index + 1,
+    title: scene.title,
+    caption: scene.caption,
+    voiceover: scene.voiceover,
+    startTime: index * sceneDuration,
+    endTime: (index + 1) * sceneDuration,
+  }));
 }
 
+function sanitizeTextForFFmpeg(text) {
+  return String(text)
+    .replace(/\\/g, "\\\\")
+    .replace(/:/g, "\\:")
+    .replace(/'/g, "\\'")
+    .replace(/"/g, '\\"')
+    .replace(/\n/g, " ")
+    .slice(0, 80);
+}
 async function createAnimatedVideo(imagePaths, scenes, sessionId) {
   return new Promise((resolve, reject) => {
     const outputPath = path.join(videoDir, `${sessionId}_fitframe.mp4`);
@@ -483,8 +549,19 @@ async function createAnimatedVideo(imagePaths, scenes, sessionId) {
     const filters = [];
 
     imagePaths.forEach((_, index) => {
+      const scene = scenes[index];
+
+      const caption = sanitizeTextForFFmpeg(
+        scene.caption || scene.title || `Scene ${index + 1}`
+      );
+
       filters.push(
-        `[${index}:v]scale=${width}:${height},zoompan=z='min(zoom+0.0015,1.12)':d=${frameCount}:s=${width}x${height}:fps=${fps},trim=duration=${sceneDuration},setpts=PTS-STARTPTS[v${index}]`
+        `[${index}:v]scale=${width}:${height},` +
+          `zoompan=z='min(zoom+0.0015,1.12)':d=${frameCount}:s=${width}x${height}:fps=${fps},` +
+          `trim=duration=${sceneDuration},setpts=PTS-STARTPTS,` +
+          `drawbox=x=0:y=${height - 150}:w=${width}:h=150:color=black@0.45:t=fill,` +
+          `drawtext=text='${caption}':fontcolor=white:fontsize=42:x=(w-text_w)/2:y=h-100,` +
+          `format=yuv420p[v${index}]`
       );
     });
 
@@ -501,11 +578,11 @@ async function createAnimatedVideo(imagePaths, scenes, sessionId) {
         "-c:v libx264",
         "-pix_fmt yuv420p",
         "-preset fast",
-        "-movflags +faststart"
+        "-movflags +faststart",
       ])
       .output(outputPath)
       .on("end", () => {
-        console.log("Video created:", outputPath);
+        console.log("Video with captions created:", outputPath);
         resolve(outputPath);
       })
       .on("error", (err) => {
@@ -545,10 +622,10 @@ app.post("/api/generate-video", async (req, res) => {
     console.log("Images ready");
 
     const videoPath = await createAnimatedVideo(
-  imagePaths,
-  session.scenes,
-  sessionId
-);
+      imagePaths,
+      session.scenes,
+      sessionId
+    );
 
     const videoUrl = `${process.env.BASE_URL}/outputs/videos/${path.basename(
       videoPath
@@ -556,7 +633,7 @@ app.post("/api/generate-video", async (req, res) => {
 
     session.videoUrl = videoUrl;
     session.narrationText = buildNarrationText(session.scenes);
-
+    session.voiceoverSegments = buildVoiceoverSegments(session.scenes);
     saveSessions();
 
     res.json({
@@ -566,8 +643,10 @@ app.post("/api/generate-video", async (req, res) => {
       title: session.title,
       scenes: session.scenes,
       narrationText: session.narrationText,
+      voiceoverSegments: session.voiceoverSegments,
       actionPlan: session.actionPlan,
-      note: "Video has silent audio. Use narrationText with browser speechSynthesis on the frontend.",
+      note: "Use narrationText with browser speechSynthesis on the frontend.",
+
     });
   } catch (error) {
     console.error("Generate video error:", error.message);
@@ -575,6 +654,9 @@ app.post("/api/generate-video", async (req, res) => {
   }
 });
 
+// ------------------
+// Get Session
+// ------------------
 app.get("/api/session/:sessionId", (req, res) => {
   const { sessionId } = req.params;
 
@@ -589,6 +671,9 @@ app.get("/api/session/:sessionId", (req, res) => {
   });
 });
 
+// ------------------
+// Start Server
+// ------------------
 app.listen(PORT, () => {
   console.log(`FitFrame backend running on http://localhost:${PORT}`);
 });

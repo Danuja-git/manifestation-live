@@ -71,53 +71,54 @@
     "scenes": [
       {
         "number": 1,
-        "title": "The Quiet Before the Change",
-        "visual_description": "A dimly lit bedroom at midmorning, curtains half-drawn, a person lying in bed with phone in hand, soft golden light trying to break through the window, cinematic and quiet mood, realistic lifestyle photography style",
-        "voiceover": "For a long time, mornings felt heavy. I would lie there, already tired before the day even started. The lethargy followed me everywhere. But somewhere underneath all of that, I knew a different version of me was possible. I just had not found her yet.",
-        "caption": "Every change begins with awareness"
+        "title": "Rising With the Sun",
+        "visual_description": "An adult male in casual athletic wear sitting up in bed in a bright morning bedroom, stretching his arms wide above his head, warm sunlight coming through the curtains, alarm showing early morning time on the nightstand, full body side view, realistic lifestyle scene",
+        "voiceover": "I wake up early now, and the morning feels fresh and full of possibility.",
+        "caption": "Early mornings are my new superpower"
       },
       {
         "number": 2,
-        "title": "One Alarm. One Step.",
-        "visual_description": "A person setting a phone alarm the night before, then in the next frame slipping out of bed in soft morning light, feet touching the floor, a glass of water on the nightstand, warm cinematic tones, hopeful and calm atmosphere",
-        "voiceover": "I decided to start with just one thing. I set my alarm fifteen minutes earlier than usual. Not an hour. Not a complete overhaul. Just fifteen minutes. And when it went off, I got up. I drank a glass of water. That was enough for day one. That small moment felt bigger than it sounds.",
-        "caption": "Fifteen minutes can change everything"
+        "title": "Morning Walk in the Park",
+        "visual_description": "An adult male in casual athletic wear walking briskly along a tree-lined park path in the early morning, arms swinging naturally, surrounded by green trees and soft golden sunlight, full body, realistic lifestyle scene",
+        "voiceover": "I take morning walks now, and they charge me up with energy that lasts all day.",
+        "caption": "Every step builds a stronger me"
       },
       {
         "number": 3,
-        "title": "The Walk That Became a Habit",
-        "visual_description": "A person walking alone on a quiet tree-lined street in the early morning, sunlight filtering through leaves, wearing comfortable clothes, earbuds in, a slight smile, cinematic wide shot with warm natural light and peaceful energy",
-        "voiceover": "After a few days of waking up earlier, I started using that extra time to walk. Just around the block at first. No pressure, no distance goals. I noticed something surprising. By midmorning, I actually felt awake. Not dragging. Not counting the hours until I could rest again. The walks started short and slowly grew longer because I wanted them to, not because I forced myself.",
-        "caption": "Movement creates the energy you are looking for"
+        "title": "Fueling Up Right",
+        "visual_description": "An adult male in casual athletic wear sitting at a kitchen table eating a balanced breakfast with fruits, eggs, and a glass of water, leaning forward with a relaxed and satisfied expression, bright natural kitchen light, full body, realistic lifestyle scene",
+        "voiceover": "I eat a nourishing breakfast now, and it gives me steady energy and focus all morning.",
+        "caption": "Good fuel powers a great day"
       },
       {
         "number": 4,
-        "title": "The Afternoon That Felt Different",
-        "visual_description": "A person sitting at a desk or kitchen table in the afternoon, looking focused and calm, a bottle of water nearby, natural light through a window, a small plant on the table, cinematic close-up on a relaxed and present expression, warm and grounded tone",
-        "voiceover": "A few weeks in, something shifted. I hit that usual afternoon slump and realized it was not as deep as before. I was still tired sometimes, but it was a normal kind of tired, not that heavy fog I used to live in. Sleeping a little earlier, waking a little earlier, walking a little more. These things were quietly rebuilding my days from the inside out.",
-        "caption": "Small habits compound into real energy"
+        "title": "Afternoon Energy Boost",
+        "visual_description": "An adult male in casual athletic wear walking up a flight of outdoor stairs energetically, hand on the railing, body in full stride, urban outdoor setting with clear daylight, full body, realistic lifestyle scene",
+        "voiceover": "I keep moving throughout the day now, and my energy stays strong from morning to evening.",
+        "caption": "I choose movement over stillness"
       },
       {
         "number": 5,
-        "title": "The Healthiest Version of Me",
-        "visual_description": "A person standing near a window in morning light, holding a warm cup, looking outside with calm confidence, cinematic portrait shot, soft golden sunrise light filling the room, a sense of quiet pride and peace, no dramatic transformation, just a person who looks rested and present",
-        "voiceover": "This is the version of me I was working toward. Not a completely different person. Just me, but lighter. More awake. More present. I wake up earlier now and it no longer feels like a punishment. I walk because it makes the rest of my day feel human. I have more energy and I know exactly where it comes from. It came from choosing myself, one small morning at a time.",
-        "caption": "You are already becoming her"
+        "title": "Winding Down Well",
+        "visual_description": "An adult male in casual athletic wear lying on his back on a yoga mat in a calm dimly lit living room, eyes closed, hands resting on his chest, doing a relaxed breathing exercise, soft lamp light in background, full body, realistic lifestyle scene",
+        "voiceover": "I wind down with intention now, and I fall asleep peacefully so I can rise strong tomorrow.",
+        "caption": "Rest is part of the journey"
       }
     ],
     "actionPlan": {
       "today": [
-        "Set your alarm 15 minutes earlier than usual tonight before you go to sleep",
-        "Place a full glass of water on your nightstand so it is the first thing you reach for in the morning",
-        "Choose a short 10-minute walking route near your home that you can do tomorrow morning"
+        "Set your alarm 30 minutes earlier than usual and place your phone across the room",
+        "Take a 10-minute walk outside at any point during the day",
+        "Turn off screens 30 minutes before bed and dim the lights"
       ],
       "thisWeek": [
-        "Walk for at least 10 minutes each morning, even on days that feel slow or low energy",
-        "Move your bedtime 15 to 20 minutes earlier to help your body start waking up more naturally",
-        "After each morning walk, take 30 seconds to notice how your body and mood feel compared to days you stayed in bed"
+        "Build a consistent wake-up time and stick to it every morning including weekends",
+        "Add a short morning walk of at least 15 minutes to your daily routine",
+        "Create a simple wind-down routine each night to improve sleep quality and morning energy"
       ]
     },
-    "narrationText": "For a long time, mornings felt heavy. I would lie there, already tired before the day even started. The lethargy followed me everywhere. But somewhere underneath all of that, I knew a different version of me was possible. I just had not found her yet. I decided to start with just one thing. I set my alarm fifteen minutes earlier than usual. Not an hour. Not a complete overhaul. Just fifteen minutes. And when it went off, I got up. I drank a glass of water. That was enough for day one. That small moment felt bigger than it sounds. After a few days of waking up earlier, I started using that extra time to walk. Just around the block at first. No pressure, no distance goals. I noticed something surprising. By midmorning, I actually felt awake. Not dragging. Not counting the hours until I could rest again. The walks started short and slowly grew longer because I wanted them to, not because I forced myself. A few weeks in, something shifted. I hit that usual afternoon slump and realized it was not as deep as before. I was still tired sometimes, but it was a normal kind of tired, not that heavy fog I used to live in. Sleeping a little earlier, waking a little earlier, walking a little more. These things were quietly rebuilding my days from the inside out. This is the version of me I was working toward. Not a completely different person. Just me, but lighter. More awake. More present. I wake up earlier now and it no longer feels like a punishment. I walk because it makes the rest of my day feel human. I have more energy and I know exactly where it comes from. It came from choosing myself, one small morning at a time.",
-    "videoUrl": "http://localhost:5000/outputs/videos/6210db91-4882-4753-8f70-1f9613943dee_fitframe.mp4"
+    "narrationText": "I wake up early now, and the morning feels fresh and full of possibility. I take morning walks now, and they charge me up with energy that lasts all day. I eat a nourishing breakfast now, and it gives me steady energy and focus all morning. I keep moving throughout the day now, and my energy stays strong from morning to evening. I wind down with intention now, and I fall asleep peacefully so I can rise strong tomorrow.",
+    "videoUrl": "http://localhost:5000/outputs/videos/6210db91-4882-4753-8f70-1f9613943dee_fitframe.mp4",
+    "avatarProfile": "adult male in casual athletic wear"
   }
 }
