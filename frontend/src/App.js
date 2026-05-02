@@ -9,6 +9,14 @@ const QUESTIONS = [
   "What's one thing you'd tell your current self about the health journey ahead?",
 ];
 
+const QUESTION_OPTIONS = [
+  ['Mental wellness', 'Physical fitness', 'Nutrition & diet', 'Sleep & rest', 'Stress management'],
+  ['Energized & strong every day', 'Flexible, lean & pain-free', 'Calm & clear-headed', 'At a healthy weight & confident', 'Running without effort'],
+  ['Morning workout + clean eating', 'Yoga, smoothies & meditation', 'Gym, meal prep & solid sleep', 'Hiking & whole foods', 'Dancing & intuitive eating'],
+  ['Confident & at peace with myself', 'Less anxious, more present', 'Motivated & clear-minded', 'Emotionally balanced & resilient', 'Proud & full of energy'],
+  ['"It\'s worth every hard day"', '"Start small — consistency wins"', '"Your body is capable of amazing things"', '"Progress is not linear — keep going"', '"Be patient and kind to yourself"'],
+];
+
 const LOADING_STEPS = [
   'Writing your voiceover script...',
   'Generating scene 1...',
@@ -181,6 +189,23 @@ export default function App() {
     }
   }
 
+  function handleOptionClick(text) {
+    if (phase !== 'chat') return;
+    push('user', text);
+    const na = [...answers, text]; setAnswers(na);
+    const next = qIdx + 1;
+    if (next < QUESTIONS.length) {
+      setPhase('thinking'); setQIdx(next);
+      setTimeout(() => { push('bot', QUESTIONS[next]); setPhase('chat'); }, 700);
+    } else {
+      setPhase('thinking');
+      setTimeout(() => {
+        push('bot', "That's a powerful vision. I have everything I need to bring your health journey to life. Ready to build your avatar?");
+        setPhase('ready');
+      }, 800);
+    }
+  }
+
   async function handleGenerate() {
     setPhase('loading'); setLoadStep(0);
     const prompt = QUESTIONS.map((q, i) => `${q}\n${answers[i]}`).join('\n\n');
@@ -312,6 +337,18 @@ export default function App() {
               )}
               <div ref={bottomRef}/>
             </div>
+
+            {phase === 'chat' && qIdx < QUESTION_OPTIONS.length && (
+              <div style={{flexShrink:0,padding:'0 28px 10px',display:'flex',gap:7,flexWrap:'wrap',animation:'fadeUp 0.25s ease'}}>
+                {QUESTION_OPTIONS[qIdx].map(opt => (
+                  <button key={opt} onClick={() => handleOptionClick(opt)} style={{background:'rgba(201,169,122,0.08)',border:'0.5px solid rgba(201,169,122,0.28)',borderRadius:20,padding:'7px 14px',fontSize:12,color:'#c9a97a',cursor:'pointer',fontFamily:'DM Sans,sans-serif',letterSpacing:'0.02em',transition:'all 0.15s',whiteSpace:'nowrap'}}
+                    onMouseEnter={e => { e.currentTarget.style.background='rgba(201,169,122,0.18)'; e.currentTarget.style.borderColor='rgba(201,169,122,0.6)'; }}
+                    onMouseLeave={e => { e.currentTarget.style.background='rgba(201,169,122,0.08)'; e.currentTarget.style.borderColor='rgba(201,169,122,0.28)'; }}>
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {phase === 'ready' && (
               <div style={{flexShrink:0,padding:'14px 28px 18px'}}>
