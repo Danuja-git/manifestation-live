@@ -266,7 +266,7 @@ export default function App() {
         {/* NAV */}
         <div style={{flexShrink:0,display:'flex',alignItems:'center',justifyContent:'space-between',padding:'0 28px',height:64,borderBottom:'0.5px solid rgba(201,169,122,0.12)'}}>
           <div style={{fontFamily:'Cormorant Garamond,serif',fontSize:20,fontWeight:300,letterSpacing:'0.06em'}}>
-            Be<em style={{fontStyle:'italic',color:'#c9a97a'}}>coming</em>
+            Manifestation<em style={{fontStyle:'italic',color:'#c9a97a'}}> AI</em>
           </div>
           <div style={{display:'flex',alignItems:'center',gap:14}}>
             <div style={{width:6,height:6,borderRadius:'50%',background:'#c9a97a',animation:'glow 2.5s ease-in-out infinite'}}/>
@@ -485,7 +485,7 @@ export default function App() {
                       <circle cx={200} cy={95} r={70} fill="#1D9E75" opacity={0.06}/>
                       <circle cx={200} cy={95} r={48} fill="#1D9E75" opacity={0.09}/>
                       <circle cx={200} cy={95} r={28} fill="#1D9E75" opacity={0.15}/>
-                      <text x={200} y={185} textAnchor="middle" fill="#5DCAA5" opacity={0.12} fontSize={8} fontFamily="DM Sans,sans-serif" letterSpacing={2}>YOUR BECOMING VIDEO</text>
+                      <text x={200} y={185} textAnchor="middle" fill="#5DCAA5" opacity={0.12} fontSize={8} fontFamily="DM Sans,sans-serif" letterSpacing={2}>YOUR MANIFESTATION AI VIDEO</text>
                     </svg>
                     <div style={{position:'absolute',inset:0,display:'flex',alignItems:'center',justifyContent:'center',zIndex:3}}>
                       <div style={{width:60,height:60,borderRadius:'50%',background:'rgba(201,169,122,0.18)',border:'1.5px solid #c9a97a',display:'flex',alignItems:'center',justifyContent:'center'}}>
