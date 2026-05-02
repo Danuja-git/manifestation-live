@@ -1,0 +1,197 @@
+╔═══════════════════════════════════════════════════════════════════════╗
+║     MANIFESTATION VIDEO GENERATOR - TEAM SETUP & ASSIGNMENT          ║
+╚═══════════════════════════════════════════════════════════════════════╝
+
+📋 PROJECT STRUCTURE
+====================
+
+You have 4 skeleton files to complete:
+
+FRONTEND (React):
+  └─ App.js
+     Person 1: Build the UI (form, button, spinner)
+     Person 3: Add logic (state management, API calls)
+
+BACKEND (Node.js):
+  └─ server.js
+     Person 2: Claude + Stability AI integration
+     Person 4: ElevenLabs + FFmpeg integration
+  └─ .env (copy from .env.template)
+  └─ package.json
+
+
+🎯 TEAM ASSIGNMENTS
+===================
+
+PERSON 1: Frontend UI Builder
+  File: App.js
+  Tasks:
+    ✓ Add useState for: prompt, loading, videoUrl, error
+    ✓ Build form with textarea and button
+    ✓ Build loading spinner (when loading=true)
+    ✓ Build video player (when videoUrl exists)
+    ✓ Add basic styling
+  Time: ~1.5 hours
+  Code lines: ~50
+
+PERSON 3: Frontend Logic Developer
+  File: App.js
+  Tasks:
+    ✓ Implement handleGenerate function
+    ✓ Add axios POST request to http://localhost:5000/api/generate
+    ✓ Handle loading/error states
+    ✓ Show/hide UI elements based on state
+    ✓ Parse and display video response
+  Time: ~1 hour
+  Code lines: ~40
+
+PERSON 2: Backend - Claude & Images
+  File: server.js (functions 1-3)
+  Tasks:
+    ✓ Implement claudeBreakdown() - call Claude API, parse scenes
+    ✓ Implement generateAllImages() - run image generation in parallel
+    ✓ Implement generateOneImage() - call Stability AI, save image
+  Time: ~2 hours
+  Code lines: ~100
+
+PERSON 4: Backend - Audio & Video
+  File: server.js (functions 4-5)
+  Tasks:
+    ✓ Implement generateAudio() - call ElevenLabs, save audio
+    ✓ Implement stitchToVideo() - use FFmpeg to create video
+  Time: ~1.5 hours
+  Code lines: ~80
+
+
+🚀 SETUP STEPS (Do this FIRST before coding)
+==============================================
+
+PERSON 1 & 3 (Frontend):
+  1. Create React app:
+     $ npx create-react-app manifestation
+     $ cd manifestation
+     $ npm install axios
+
+  2. Replace src/App.js with the App.js skeleton
+
+  3. Start the app:
+     $ npm start
+     (It will open at localhost:3000)
+
+PERSON 2 & 4 (Backend):
+  1. Create backend folder:
+     $ mkdir manifestation-backend
+     $ cd manifestation-backend
+
+  2. Initialize:
+     $ npm init -y
+     $ npm install express axios cors dotenv fluent-ffmpeg
+
+  3. Create files:
+     - Copy server.js here
+     - Copy .env.template as .env
+
+  4. Get API Keys (CRITICAL):
+     - Claude: https://console.anthropic.com/
+     - Stability AI: https://platform.stability.ai/account/api-keys
+     - ElevenLabs: https://elevenlabs.io/
+
+  5. Add keys to .env file
+
+  6. Install FFmpeg on your machine:
+     Mac:    brew install ffmpeg
+     Windows: choco install ffmpeg OR download from ffmpeg.org
+     Ubuntu:  sudo apt-get install ffmpeg
+
+  7. Start backend:
+     $ node server.js
+
+
+⚙️ HOW THEY CONNECT
+===================
+
+Frontend → Backend Flow:
+  1. User types prompt in textarea
+  2. Clicks "Create My Video" button
+  3. Frontend sends POST to http://localhost:5000/api/generate
+  4. Backend receives prompt
+  5. Backend calls Claude API
+  6. Backend calls Stability AI (parallel for all scenes)
+  7. Backend calls ElevenLabs
+  8. Backend calls FFmpeg
+  9. Backend returns video URL
+  10. Frontend displays video
+
+
+📝 CHECKLIST BEFORE STARTING
+=============================
+
+Frontend Team (Person 1 & 3):
+  □ React app created
+  □ App.js replaced with skeleton
+  □ Can see the form in browser (http://localhost:3000)
+
+Backend Team (Person 2 & 4):
+  □ Node.js and npm installed
+  □ Node modules installed (npm install ...)
+  □ API keys obtained
+  □ .env file created with API keys
+  □ FFmpeg installed and working
+  □ Server starts without errors (node server.js)
+
+
+🔧 TESTING
+==========
+
+Once BOTH frontend and backend are done:
+
+Terminal 1:
+  $ cd manifestation
+  $ npm start
+  (Frontend running at localhost:3000)
+
+Terminal 2:
+  $ cd manifestation-backend
+  $ node server.js
+  (Backend running at localhost:5000)
+
+Then:
+  1. Go to http://localhost:3000
+  2. Type a prompt: "In 2 years, I am a successful engineer"
+  3. Click "Create My Video"
+  4. Wait ~40 seconds
+  5. Video should appear!
+
+
+❓ TROUBLESHOOTING
+==================
+
+Backend won't start:
+  - Check .env file has all 3 API keys
+  - Check FFmpeg is installed: ffmpeg -version
+  - Check port 5000 is available
+
+No video appears:
+  - Check browser console for errors (F12)
+  - Check terminal logs for error messages
+  - Make sure backend is running
+  - Make sure frontend is calling correct URL
+
+API errors:
+  - Double-check API keys in .env
+  - Make sure APIs have credit/free tier available
+
+
+✅ DONE!
+========
+
+When all 4 functions are implemented and both servers running:
+  - Frontend talks to Backend ✓
+  - Claude breaks down prompt ✓
+  - Stability AI generates images ✓
+  - ElevenLabs creates voiceover ✓
+  - FFmpeg stitches video ✓
+  - User sees final video ✓
+
+
+Questions? Ask before coding!

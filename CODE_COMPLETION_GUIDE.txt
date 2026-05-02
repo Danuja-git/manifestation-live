@@ -1,0 +1,412 @@
+═══════════════════════════════════════════════════════════════════════════
+  CODE COMPLETION GUIDE - What Each Person Needs to Implement
+═══════════════════════════════════════════════════════════════════════════
+
+═══════════════════════════════════════════════════════════════════════════
+PERSON 1: Frontend UI Builder (App.js)
+═══════════════════════════════════════════════════════════════════════════
+
+TASK 1: Add State Variables (Lines 10-15)
+─────────────────────────────────────────
+Replace this:
+  const [prompt, setPrompt] = useState('');
+  // TODO: Add other states here
+
+With this:
+  const [prompt, setPrompt] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [videoUrl, setVideoUrl] = useState(null);
+  const [error, setError] = useState('');
+
+
+TASK 2: Fix the Submit Button (Around line 85)
+──────────────────────────────────────────────
+Replace:
+  <button type="submit" style={styles.button}>
+    Create My Video
+  </button>
+
+With:
+  <button 
+    type="submit" 
+    disabled={loading}
+    style={{...styles.button, opacity: loading ? 0.5 : 1}}
+  >
+    {loading ? 'Generating... (this takes ~30 seconds)' : 'Create My Video'}
+  </button>
+
+
+TASK 3: Show Loading Spinner (Around line 98)
+──────────────────────────────────────────────
+Replace:
+  {false && (
+    <div style={styles.loading}>
+
+With:
+  {loading && (
+    <div style={styles.loading}>
+
+
+TASK 4: Show Error Message (Around line 108)
+─────────────────────────────────────────────
+Replace:
+  {false && <div style={styles.error}>Error message here</div>}
+
+With:
+  {error && <div style={styles.error}>{error}</div>}
+
+
+TASK 5: Show Video Player (Around line 117)
+────────────────────────────────────────────
+Replace:
+  {false && (
+    <div style={styles.videoContainer}>
+      <h2>Your Manifestation Video Ready! 🎉</h2>
+      {/* TODO: Add <video controls src={videoUrl} /> */}
+      <a href={videoUrl} download style={styles.downloadLink}>
+        ⬇️ Download Video
+      </a>
+    </div>
+  )}
+
+With:
+  {videoUrl && (
+    <div style={styles.videoContainer}>
+      <h2>Your Manifestation Video Ready! 🎉</h2>
+      <video 
+        width="100%" 
+        controls 
+        style={styles.video}
+        src={videoUrl}
+      />
+      <a href={videoUrl} download style={styles.downloadLink}>
+        ⬇️ Download Video
+      </a>
+    </div>
+  )}
+
+
+═══════════════════════════════════════════════════════════════════════════
+PERSON 3: Frontend Logic Developer (App.js)
+═══════════════════════════════════════════════════════════════════════════
+
+TASK 1: Implement handleGenerate Function (Lines 22-45)
+──────────────────────────────────────────────────────
+Replace this whole function:
+  const handleGenerate = async (e) => {
+    e.preventDefault();
+    // TODO: Add validation...
+    
+    // TODO: Set loading to true...
+    
+    try {
+      // TODO: Make POST request...
+      
+      // TODO: Set videoUrl...
+      
+    } catch (err) {
+      // TODO: Set error message...
+    } finally {
+      // TODO: Set loading to false...
+    }
+  };
+
+With this:
+  const handleGenerate = async (e) => {
+    e.preventDefault();
+    
+    // Validate input
+    if (!prompt.trim()) {
+      setError('Please enter your manifestation');
+      return;
+    }
+    
+    setLoading(true);
+    setError('');
+    
+    try {
+      // Call backend API
+      const response = await axios.post('http://localhost:5000/api/generate', {
+        prompt: prompt
+      });
+      
+      // Set the video URL from response
+      setVideoUrl(response.data.videoUrl);
+      
+      // Clear the prompt
+      setPrompt('');
+      
+    } catch (err) {
+      // Show error message
+      setError('Error: ' + (err.response?.data?.error || err.message));
+      console.error(err);
+    } finally {
+      // Stop loading
+      setLoading(false);
+    }
+  };
+
+
+═══════════════════════════════════════════════════════════════════════════
+PERSON 2: Backend - Claude & Images (server.js)
+═══════════════════════════════════════════════════════════════════════════
+
+TASK 1: Implement claudeBreakdown() Function (Lines 100-135)
+────────────────────────────────────────────────────────────
+Replace this function:
+  async function claudeBreakdown(prompt) {
+    try {
+      // TODO: Make POST request to Claude API...
+      // TODO: Parse the response...
+      throw new Error('claudeBreakdown not implemented yet');
+    } catch (error) {
+      throw new Error('Claude API failed: ' + error.message);
+    }
+  }
+
+With this:
+  async function claudeBreakdown(prompt) {
+    try {
+      const response = await axios.post(
+        'https://api.anthropic.com/v1/messages',
+        {
+          model: 'claude-3-5-sonnet-20241022',
+          max_tokens: 2000,
+          messages: [{
+            role: 'user',
+            content: `Break this into 5-7 vivid, cinematic scenes for a video. For EACH scene write:
+1. A detailed visual description (what the camera sees)
+2. A voiceover sentence
+
+IMPORTANT: Return ONLY valid JSON, no other text.
+
+Manifestation: "${prompt}"
+
+Format:
+{
+  "scenes": [
+    {
+      "number": 1,
+      "visual_description": "A person walks into a modern office...",
+      "voiceover": "In two years, I walk into my dream job..."
+    }
+  ]
+}`
+          }]
+        },
+        {
+          headers: {
+            'x-api-key': process.env.CLAUDE_API_KEY,
+            'content-type': 'application/json'
+          }
+        }
+      );
+
+      const text = response.data.content[0].text;
+      const jsonMatch = text.match(/\{[\s\S]*\}/);
+      if (!jsonMatch) throw new Error('Invalid Claude response');
+      
+      const data = JSON.parse(jsonMatch[0]);
+      return data.scenes;
+
+    } catch (error) {
+      throw new Error('Claude API failed: ' + error.message);
+    }
+  }
+
+
+TASK 2: Implement generateAllImages() Function (Lines 137-150)
+──────────────────────────────────────────────────────────────
+Replace this function:
+  async function generateAllImages(scenes) {
+    try {
+      // TODO: Create promises for each scene...
+      // TODO: Use Promise.all()...
+      throw new Error('generateAllImages not implemented yet');
+    } catch (error) {
+      throw new Error('Image generation failed: ' + error.message);
+    }
+  }
+
+With this:
+  async function generateAllImages(scenes) {
+    try {
+      const promises = scenes.map((scene, i) => 
+        generateOneImage(scene.visual_description, i + 1)
+      );
+      return await Promise.all(promises);
+    } catch (error) {
+      throw new Error('Image generation failed: ' + error.message);
+    }
+  }
+
+
+TASK 3: Implement generateOneImage() Function (Lines 152-185)
+──────────────────────────────────────────────────────────────
+Replace this function:
+  async function generateOneImage(description, number) {
+    try {
+      // TODO: Make POST request to Stability AI...
+      // TODO: Save image...
+      console.log(`  Generating image ${number}...`);
+      throw new Error('generateOneImage not implemented yet');
+    } catch (error) {
+      throw new Error(`Image ${number} failed: ` + error.message);
+    }
+  }
+
+With this:
+  async function generateOneImage(description, number) {
+    try {
+      console.log(`  Generating image ${number}...`);
+      
+      const response = await axios.post(
+        'https://api.stability.ai/v1/generate',
+        {
+          prompt: description,
+          output_format: 'jpeg',
+          width: 1024,
+          height: 576
+        },
+        {
+          headers: {
+            'authorization': `Bearer ${process.env.STABILITY_API_KEY}`
+          }
+        }
+      );
+
+      const imagePath = path.join(videoDir, `scene_${number}.jpg`);
+      const imageData = Buffer.from(response.data.image, 'base64');
+      fs.writeFileSync(imagePath, imageData);
+      
+      return imagePath;
+
+    } catch (error) {
+      throw new Error(`Image ${number} failed: ` + error.message);
+    }
+  }
+
+
+═══════════════════════════════════════════════════════════════════════════
+PERSON 4: Backend - Audio & Video (server.js)
+═══════════════════════════════════════════════════════════════════════════
+
+TASK 1: Implement generateAudio() Function (Lines 192-215)
+──────────────────────────────────────────────────────────
+Replace this function:
+  async function generateAudio(scenes) {
+    try {
+      // TODO: Join voiceover strings...
+      // TODO: Make POST request to ElevenLabs...
+      // TODO: Save audio...
+      throw new Error('generateAudio not implemented yet');
+    } catch (error) {
+      throw new Error('Audio generation failed: ' + error.message);
+    }
+  }
+
+With this:
+  async function generateAudio(scenes) {
+    try {
+      const narration = scenes.map(s => s.voiceover).join(' ');
+      
+      const response = await axios.post(
+        'https://api.elevenlabs.io/v1/text-to-speech/21m00Tcm4TlvDq8ikWAM',
+        {
+          text: narration,
+          model_id: 'eleven_monolingual_v1',
+          voice_settings: { stability: 0.5, similarity_boost: 0.75 }
+        },
+        {
+          headers: {
+            'xi-api-key': process.env.ELEVENLABS_API_KEY
+          },
+          responseType: 'arraybuffer'
+        }
+      );
+
+      const audioPath = path.join(videoDir, 'voiceover.mp3');
+      fs.writeFileSync(audioPath, response.data);
+      return audioPath;
+
+    } catch (error) {
+      throw new Error('Audio generation failed: ' + error.message);
+    }
+  }
+
+
+TASK 2: Implement stitchToVideo() Function (Lines 217-245)
+───────────────────────────────────────────────────────────
+Replace this function:
+  async function stitchToVideo(imagePaths, audioPath) {
+    return new Promise((resolve, reject) => {
+      try {
+        const outputPath = path.join(videoDir, `video_${Date.now()}.mp4`);
+        // TODO: Use FFmpeg to...
+        throw new Error('stitchToVideo not implemented yet');
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+With this:
+  async function stitchToVideo(imagePaths, audioPath) {
+    return new Promise((resolve, reject) => {
+      try {
+        const outputPath = path.join(videoDir, `video_${Date.now()}.mp4`);
+        
+        let cmd = ffmpeg();
+
+        // Add each image (5 seconds each)
+        imagePaths.forEach(img => {
+          cmd = cmd.input(img).inputOptions('-t 5');
+        });
+
+        // Add audio
+        cmd = cmd.input(audioPath);
+
+        // Create concat filter
+        const numImages = imagePaths.length;
+        let filterComplex = '';
+        for (let i = 0; i < numImages; i++) {
+          filterComplex += `[${i}:v]`;
+        }
+        filterComplex += `concat=n=${numImages}:v=1:a=0[v];[v][${numImages}:a]concat=n=1:v=1:a=1[outv][outa]`;
+
+        cmd.outputOptions([
+          '-filter_complex', filterComplex,
+          '-map', '[outv]',
+          '-map', '[outa]',
+          '-c:v', 'libx264',
+          '-preset', 'fast',
+          '-c:a', 'aac'
+        ])
+        .output(outputPath)
+        .on('end', () => {
+          console.log('  ✅ Video created');
+          resolve(outputPath);
+        })
+        .on('error', (err) => {
+          console.error('FFmpeg error:', err);
+          reject(err);
+        })
+        .run();
+
+      } catch (error) {
+        reject(error);
+      }
+    });
+  }
+
+
+═══════════════════════════════════════════════════════════════════════════
+READY TO CODE?
+═══════════════════════════════════════════════════════════════════════════
+
+✓ Person 1: Copy the 5 tasks into App.js
+✓ Person 3: Copy the handleGenerate function into App.js
+✓ Person 2: Copy the 3 functions into server.js
+✓ Person 4: Copy the 2 functions into server.js
+
+That's it! 🚀
