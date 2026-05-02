@@ -1,0 +1,10 @@
+{
+  "ignore": [
+    "sessions.json",
+    "outputs/*",
+    "outputs/images/*",
+    "outputs/audio/*",
+    "outputs/videos/*"
+  ],
+  "ext": "js,json"
+}
