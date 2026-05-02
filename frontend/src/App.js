@@ -49,7 +49,6 @@ export default function App() {
   const bottomRef = useRef(null);
   const inputRef = useRef(null);
 
-  // send first question on mount
   useEffect(() => {
     setTimeout(() => {
       setMessages([{ from: 'bot', text: QUESTIONS[0], id: Date.now() }]);
@@ -88,7 +87,6 @@ export default function App() {
         setPhase('chat');
       }, 700);
     } else {
-      // all 5 answered
       setPhase('thinking');
       setTimeout(() => {
         pushMessage('bot', "That's a powerful vision. I have everything I need to bring your health journey to life. Ready to generate your video?");
@@ -175,7 +173,6 @@ export default function App() {
           margin: 0 auto;
         }
 
-        /* header */
         .header {
           flex-shrink: 0;
           padding: 0 24px;
@@ -215,7 +212,6 @@ export default function App() {
         }
         .new-btn:hover { color: #777; border-color: #2e2e2e; }
 
-        /* progress bar */
         .progress-bar-wrap {
           flex-shrink: 0;
           padding: 10px 24px 0;
@@ -246,7 +242,6 @@ export default function App() {
           text-align: right;
         }
 
-        /* messages */
         .messages {
           flex: 1;
           overflow-y: auto;
@@ -283,7 +278,6 @@ export default function App() {
           color: rgba(228,202,100,0.95);
         }
 
-        /* typing */
         .typing-row { display: flex; animation: fadeUp 0.2s ease both; }
         .typing-bubble {
           background: #111; border: 1px solid #1a1a1a;
@@ -299,7 +293,6 @@ export default function App() {
         .tdot:nth-child(2) { animation-delay: 0.16s; }
         .tdot:nth-child(3) { animation-delay: 0.32s; }
 
-        /* generate button */
         .generate-wrap { padding: 8px 24px 10px; animation: fadeUp 0.3s ease both; }
         .generate-btn {
           width: 100%; padding: 14px;
@@ -317,7 +310,6 @@ export default function App() {
           transform: translateY(-1px);
         }
 
-        /* input */
         .input-area {
           flex-shrink: 0;
           padding: 10px 24px 20px;
@@ -343,7 +335,6 @@ export default function App() {
         }
         .send-btn:disabled { cursor: not-allowed; }
 
-        /* loading */
         .loading-panel {
           flex: 1; display: flex; flex-direction: column;
           align-items: center; justify-content: center;
@@ -373,7 +364,6 @@ export default function App() {
         .step-item.active  .step-icon { background: rgba(212,175,55,0.1); color: #d4af37; border: 1px solid rgba(212,175,55,0.4); box-shadow: 0 0 6px rgba(212,175,55,0.2); }
         .step-item.pending .step-icon { background: #0c0c0c; color: #1a1a1a; border: 1px solid #141414; }
 
-        /* video */
         .video-panel { flex: 1; display: flex; flex-direction: column; padding: 24px; gap: 14px; overflow-y: auto; }
         .video-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: rgba(212,175,55,0.45); }
         video { width: 100%; border-radius: 8px; border: 1px solid #1a1a1a; background: #000; }
@@ -395,7 +385,6 @@ export default function App() {
         }
         .btn-over:hover { color: #555; border-color: #2a2a2a; }
 
-        /* error */
         .error-panel {
           flex: 1; display: flex; flex-direction: column;
           align-items: center; justify-content: center; padding: 40px; gap: 14px;
@@ -415,7 +404,6 @@ export default function App() {
 
       <div className="layout">
 
-        {/* header */}
         <div className="header">
           <div className="brand">
             <Logo />
@@ -430,7 +418,6 @@ export default function App() {
           </div>
         </div>
 
-        {/* progress */}
         {(phase === 'chat' || phase === 'thinking' || phase === 'ready') && (
           <div className="progress-bar-wrap">
             <div className="progress-track">
@@ -440,7 +427,6 @@ export default function App() {
           </div>
         )}
 
-        {/* chat */}
         {(phase === 'chat' || phase === 'thinking' || phase === 'ready') && (
           <>
             <div className="messages">
@@ -497,7 +483,6 @@ export default function App() {
           </>
         )}
 
-        {/* loading */}
         {phase === 'loading' && (
           <div className="loading-panel">
             <div className="spinner" />
@@ -512,7 +497,6 @@ export default function App() {
           </div>
         )}
 
-        {/* done */}
         {phase === 'done' && (
           <div className="video-panel">
             <div className="video-label">Your health vision video</div>
@@ -524,7 +508,6 @@ export default function App() {
           </div>
         )}
 
-        {/* error */}
         {phase === 'error' && (
           <div className="error-panel">
             <div className="error-msg">{errorMsg}</div>
